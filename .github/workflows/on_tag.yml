@@ -9,7 +9,7 @@ on:
 
 jobs:
   on-tag:
-    uses: bth-algo/utils/.github/workflows/tester.yml@main
+    uses: bth-algo/utils2/.github/workflows/tester.yml@main
     with:
       kmom_paths: ${{ inputs.kmom_paths }}
     secrets: inherit

@@ -66,7 +66,7 @@ jobs:
   run-tester:
     needs: check-label-and-auth
     if: needs.check-label-and-auth.outputs.is_allowed_label == 'true' && needs.check-label-and-auth.outputs.label_name == 'Run tests'
-    uses: bth-algo/utils/.github/workflows/tester.yml@main
+    uses: bth-algo/utils2/.github/workflows/tester.yml@main
     with:
       kmom_paths: ${{ inputs.kmom_paths }}
     secrets: inherit
@@ -185,7 +185,7 @@ jobs:
 
       - name: Get Student Canvas ID
         id: get-canvas-id
-        uses: bth-algo/utils/.github/actions/get-student-canvas-id@main
+        uses: bth-algo/utils2/.github/actions/get-student-canvas-id@main
         with:
           course_id: ${{ inputs.course_id }}
           canvas_api_token: ${{ secrets.CANVAS_API_TOKEN }}
@@ -193,13 +193,13 @@ jobs:
           github_login: ${{ github.event.pull_request.user.login }}
 
       - name: Resolve assignment ID
-        uses: bth-python/utils/.github/actions/get-assignment-id@main
+        uses: bth-python/utils2/.github/actions/get-assignment-id@main
         id: resolve
         with:
           available_assignments: ${{ inputs.available_assignments }}
 
       - name: Submit grade to Canvas
-        uses: bth-python/utils/.github/actions/update-canvas@main
+        uses: bth-python/utils2/.github/actions/update-canvas@main
         id: update_canvas
         with:
           subcommand: "grade_submission"
