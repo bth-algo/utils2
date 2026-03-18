@@ -57,13 +57,13 @@ jobs:
           read_org_token: ${{ secrets.READ_ORG_TOKEN }}
           github_login: ${{ github.event.pull_request.user.login }}
 
-      - uses: bth-python/utils2/.github/actions/get-assignment-id@main
+      - uses: bth-algo/utils2/.github/actions/get-assignment-id@main
         id: resolve
         with:
           available_assignments: ${{ inputs.available_assignments }}
 
       - name: Update Canvas with closed PR
-        uses: bth-python/utils2/.github/actions/update-canvas@main
+        uses: bth-algo/utils2/.github/actions/update-canvas@main
         with:
           subcommand: "grade_submission"
           grade: "null"
@@ -98,13 +98,13 @@ jobs:
           read_org_token: ${{ secrets.READ_ORG_TOKEN }}
           github_login: ${{ github.event.pull_request.user.login }}
 
-      - uses: bth-python/utils2/.github/actions/get-assignment-id@main
+      - uses: bth-algo/utils2/.github/actions/get-assignment-id@main
         id: resolve
         with:
           available_assignments: ${{ inputs.available_assignments }}
 
       - name: Update Canvas with closed PR
-        uses: bth-python/utils2/.github/actions/update-canvas@main
+        uses: bth-algo/utils2/.github/actions/update-canvas@main
         with:
           subcommand: "grade_submission"
           grade: "Ux"

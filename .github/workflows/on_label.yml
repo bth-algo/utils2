@@ -193,13 +193,13 @@ jobs:
           github_login: ${{ github.event.pull_request.user.login }}
 
       - name: Resolve assignment ID
-        uses: bth-python/utils2/.github/actions/get-assignment-id@main
+        uses: bth-algo/utils2/.github/actions/get-assignment-id@main
         id: resolve
         with:
           available_assignments: ${{ inputs.available_assignments }}
 
       - name: Submit grade to Canvas
-        uses: bth-python/utils2/.github/actions/update-canvas@main
+        uses: bth-algo/utils2/.github/actions/update-canvas@main
         id: update_canvas
         with:
           subcommand: "grade_submission"

@@ -94,9 +94,9 @@ jobs:
             const passed = result === 'success';
             core.setOutput('tests_passed', passed ? 'true' : 'false');
             if (passed) {
-              console.log('✅ All validation and tests passed');
+              console.log('✅ All tests passed');
             } else {
-              console.log('❌ Validation or tests failed');
+              console.log('❌ Tests failed');
             }
 
             // Query jobs for this run to build a per-folder summary
@@ -116,12 +116,9 @@ jobs:
               const lines = [`- ${jobEmoji} **${folder}** ([view output](${job.html_url}))`];
 
               for (const step of (job.steps || [])) {
-                if (step.name === 'Validate code') {
+                if (step.name && step.name.startsWith('Run kmom test')) {
                   const e = step.conclusion === 'success' ? '✅' : '❌';
-                  lines.push(`  - ${e} \`uv run ruff check ${folder.replace('tests', 'src')}\``);
-                } else if (step.name && step.name.startsWith('Run kmom test')) {
-                  const e = step.conclusion === 'success' ? '✅' : '❌';
-                  lines.push(`  - ${e} \`uv run tester -f ${folder}\``);
+                  lines.push(`  - ${e} \`Tests passed for test project ${folder}\``);
                 }
               }
               return lines.join('\n');

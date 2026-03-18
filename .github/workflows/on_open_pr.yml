@@ -204,13 +204,13 @@ jobs:
           read_org_token: ${{ secrets.READ_ORG_TOKEN }}
           github_login: ${{ github.event.pull_request.user.login }}
 
-      - uses: bth-python/utils2/.github/actions/get-assignment-id@main
+      - uses: bth-algo/utils2/.github/actions/get-assignment-id@main
         id: resolve
         with:
           available_assignments: ${{ inputs.available_assignments }}
 
       - name: Submit Assignment to Canvas
-        uses: bth-python/utils2/.github/actions/update-canvas@main
+        uses: bth-algo/utils2/.github/actions/update-canvas@main
         id: update_canvas
         with:
           subcommand: "submit_assignment"
@@ -222,7 +222,7 @@ jobs:
           read_org_token: "${{ secrets.READ_ORG_TOKEN }}"
 
       - name: Set grade to TP in Canvas
-        uses: bth-python/utils2/.github/actions/update-canvas@main
+        uses: bth-algo/utils2/.github/actions/update-canvas@main
         with:
           subcommand: "grade_submission"
           comment: "Automated grading: All tests passed. Ready for manual grading."
