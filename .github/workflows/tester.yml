@@ -53,11 +53,8 @@ jobs:
       matrix: ${{ fromJson(needs.generate-matrix.outputs.kmoms) }}
 
     steps:
-      - name: setup-python
-        uses: bth-python/utils2/.github/actions/setup-python@main
-
-      - name: "Validate code"
-        run: uv run ruff check $(echo "${{ matrix.folder }}" | sed 's/tests/src/')
+      - name: setup-csharp
+        uses: bth-algo/utils2/.github/actions/setup-csharp@main
 
       - name: Run kmom test in ${{ matrix.folder }}
         if: always()
