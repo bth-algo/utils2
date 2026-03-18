@@ -59,7 +59,7 @@ jobs:
       - name: Run kmom test in ${{ matrix.folder }}
         if: always()
         run: |
-          echo "🔬 Running kmom: ${{ matrix.folder }}"
+          echo "🔬 Running kmom: ${ matrix.folder[@] }"
           for proj in "${{ matrix.folder }}"; do
               dotnet build "$proj" --nologo
               if ! dotnet test "$proj" --nologo; then
