@@ -62,7 +62,7 @@ jobs:
           echo "🔬 Running kmom: ${{ matrix.folder }}"
           for proj in "${{ matrix.folder }}"; do
             task_name=$(basename "$proj" | sed -E 's/\.Tests\.csproj$//')
-            console_proj=$(find . -type f -name "${task_name}.csproj" | head -n 1)
+            console_proj=$(find ./student-submission -type f -name "${task_name}.csproj" | head -n 1)
 
             [[ -n "$console_proj" ]] || continue
 
