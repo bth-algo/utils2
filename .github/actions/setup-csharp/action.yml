@@ -1,11 +1,11 @@
-name: "Setup Python"
-description: "Install UV and dependencies"
+name: "Setup CSharp"
+description: "Install csharp, get student code and test code."
 runs:
   using: "composite"
   steps:
     - uses: actions/checkout@v4
       with:
-        repository: bth-python/python-abcd25
+        repository: ${{ github.event.repository.name }}
 
     - uses: actions/checkout@v4
       with:
@@ -14,22 +14,23 @@ runs:
     - name: Copy student code
       shell: bash
       run: |
-        rsync -av --delete ./student-submission/src/ ./src/
+        rsync -av --delete ./student-submission/kmom*/ .
 
-    - name: Install uv
-      uses: astral-sh/setup-uv@v5
+    - name: Checkout test code
+      uses: actions/checkout@v4
       with:
-        enable-cache: true
-        cache-dependency-glob: "uv.lock"
+        repository: bth-algo/template2
+        path: ./template2
 
-    - name: "Set up Python"
-      uses: actions/setup-python@v5
-      with:
-        python-version-file: ".python-version"
-
-    - name: Install the project
+    - name: Copy test code
       shell: bash
-      run: uv sync --locked --all-extras --dev
+      run: |
+        rsync -av --delete ./template2/tests ./student-submission/.
+
+    - name: "Set up .NET SDK and CSharp"
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '9.0.x'
 
     - name: Debug context
       shell: bash
@@ -38,6 +39,4 @@ runs:
         echo "github.head_ref: ${{ github.head_ref }}"
         echo "github.base_ref: ${{ github.base_ref }}"
         echo "github.event_name: ${{ github.event_name }}"
-        echo "uv --version $(uv --version)"
-        echo "uv run python3 --version $(uv run python3 --version)"
-        echo "uv pip list $(uv pip list)"
+        echo "github.event.repository.name: ${{ github.event.repository.name }}"
