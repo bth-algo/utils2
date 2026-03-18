@@ -59,7 +59,7 @@ jobs:
       - name: Run kmom test in ${{ matrix.folder }}
         if: always()
         run: |
-          echo "🔬 Running kmom: ${ matrix.folder[@] }"
+          echo "🔬 Running kmom: ${{ matrix.folder }}"
           for proj in "${{ matrix.folder }}"; do
             task_name=$(basename "$proj" | sed -E 's/\.Tests\.csproj$//')
             console_proj=$(find . -type f -name "${task_name}.csproj" | head -n 1)
