@@ -61,11 +61,15 @@ jobs:
         run: |
           echo "🔬 Running kmom: ${ matrix.folder[@] }"
           for proj in "${{ matrix.folder }}"; do
-              dotnet build "$proj" --nologo
-              if ! dotnet test "$proj" --nologo; then
-                  tests_passed=false
-              fi
-              echo ""
+            task_name=$(basename "$proj" | sed -E 's/\.Tests\.csproj$//')
+            console_proj=$(find . -type f -name "${task_name}.csproj" | head -n 1)
+
+            [[ -n "$console_proj" ]] || continue
+
+            dotnet add "$proj" reference "$console_proj"
+
+            dotnet build "./template2/$proj" --nologo
+            dotnet test "./template2/$proj" --nologo
           done
 
   check-results:
