@@ -63,15 +63,15 @@ jobs:
           echo "🔬 Running kmom: ${{ matrix.folder }}"
           for proj in "${{ matrix.folder }}"; do
             task_name=$(basename "$proj" | sed -E 's/\.Tests\.csproj$//')
-            echo "Testing: $task_name with ./template2/$proj"
+            echo "Testing: $task_name with $proj"
             console_proj=$(find ./student-submission -type f -name "${task_name}.csproj" | head -n 1)
 
             [[ -n "$console_proj" ]] || continue
 
-            dotnet add "./template2/$proj" reference "$console_proj"
+            dotnet add "$proj" reference "$console_proj"
 
-            dotnet build "./template2/$proj" --nologo
-            dotnet test "./template2/$proj" --nologo
+            dotnet build "$proj" --nologo
+            dotnet test "$proj" --nologo
           done
 
   check-results:

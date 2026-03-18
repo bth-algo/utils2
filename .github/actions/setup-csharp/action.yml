@@ -13,6 +13,11 @@ runs:
         repository: bth-algo/template2
         path: ./template2
 
+    - name: Copy test code to student code
+      shell: bash
+      run: |
+        rsync -av --delete ./template2/tests ./student-submission/.
+
     - name: "Set up .NET SDK and CSharp"
       uses: actions/setup-dotnet@v4
       with:
