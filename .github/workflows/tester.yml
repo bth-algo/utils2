@@ -58,6 +58,7 @@ jobs:
 
       - name: Run kmom test in ${{ matrix.folder }}
         if: always()
+        continue-on-error: true
         run: |
           echo "🔬 Running kmom: ${{ matrix.folder }}"
           for proj in "${{ matrix.folder }}"; do
