@@ -14,7 +14,7 @@ runs:
     - name: Copy test code to student code
       shell: bash
       run: |
-        rsync -av --delete ./student-submission/kmom* ./src/.
+        rsync -av --delete ./student-submission/kmom* .
 
     - name: "Set up .NET SDK and CSharp"
       uses: actions/setup-dotnet@v4
