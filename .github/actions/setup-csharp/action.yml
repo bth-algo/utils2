@@ -5,18 +5,16 @@ runs:
   steps:
     - uses: actions/checkout@v4
       with:
-        path: ./student-submission
-
-    - name: Checkout test code
-      uses: actions/checkout@v4
-      with:
         repository: bth-algo/template2
-        path: ./template2
+
+    - uses: actions/checkout@v4
+      with:
+        path: ./student-submission
 
     - name: Copy test code to student code
       shell: bash
       run: |
-        rsync -av --delete ./template2/tests ./student-submission/.
+        rsync -av --delete ./student-submission/kmom* ./src/.
 
     - name: "Set up .NET SDK and CSharp"
       uses: actions/setup-dotnet@v4
