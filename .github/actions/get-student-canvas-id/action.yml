@@ -46,7 +46,7 @@ runs:
         response=$(curl --silent --fail-with-body \
           --request POST \
           --url https://api.github.com/graphql \
-          --header "Authorization: bearer ${{ inputs.read_org_token }}" \
+          --header "Authorization: Bearer ${{ inputs.read_org_token }}" \
           --header "Content-Type: application/json" \
           --data "$(jq -n \
             --arg org "${{ github.repository_owner }}" \
