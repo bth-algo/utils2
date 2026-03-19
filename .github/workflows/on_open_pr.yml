@@ -221,14 +221,14 @@ jobs:
           assignment_id: ${{ steps.resolve.outputs.assignment }}
           read_org_token: "${{ secrets.READ_ORG_TOKEN }}"
 
-      - name: Set grade to TP in Canvas
+      - name: Set grade to PG in Canvas
         uses: bth-algo/utils2/.github/actions/update-canvas@main
         with:
           subcommand: "grade_submission"
           comment: "Automated grading: All tests passed. Ready for manual grading."
           canvas_api_token: ${{ secrets.CANVAS_API_TOKEN }}
           student_id: ${{ steps.get-canvas-id.outputs.canvas_student_id }}
-          grade: "TP"
+          grade: "PG"
           course_id: ${{inputs.course_id}}
           assignment_id: ${{ steps.resolve.outputs.assignment }}
           read_org_token: "${{ secrets.READ_ORG_TOKEN }}"
