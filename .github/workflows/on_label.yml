@@ -141,7 +141,14 @@ jobs:
         id: find-grade
         run: |
           label="${{ needs.check-label-and-auth.outputs.label_name }}"
-          grade="${label#Grade: }"
+          if [[ "$label" == Grade:\ * ]]; then
+            grade="${label#Grade: }"
+          elif [[ "$label" == "Test passed (TP)" ]]; then
+            grade="TP"
+          else
+            echo "❌ Unknown label format: $label"
+            exit 1
+          fi
           echo "grade=$grade" >> "$GITHUB_OUTPUT"
           echo "Extracted grade: $grade"
 
