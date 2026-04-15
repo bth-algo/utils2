@@ -143,7 +143,7 @@ jobs:
           label="${{ needs.check-label-and-auth.outputs.label_name }}"
           if [[ "$label" == Grade:\ * ]]; then
             grade="${label#Grade: }"
-          elif [[ "$label" == "Test passed (TP)" ]]; then
+          elif [[ "$label" == "Tests passed (TP)" ]]; then
             grade="TP"
           else
             echo "❌ Unknown label format: $label"
