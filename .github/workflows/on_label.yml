@@ -134,7 +134,7 @@ jobs:
 
   submit-grade:
     needs: check-label-and-auth
-    if: "contains(needs.check-label-and-auth.outputs.label_name, 'Grade: ') && needs.check-label-and-auth.outputs.is_teacher == 'true'"
+    if: "(contains(needs.check-label-and-auth.outputs.label_name, 'Grade: ') || contains(needs.check-label-and-auth.outputs.label_name, 'Tests passed (TP)')) && needs.check-label-and-auth.outputs.is_teacher == 'true'"
     runs-on: ubuntu-latest
     steps:
       - name: Get grade from label
