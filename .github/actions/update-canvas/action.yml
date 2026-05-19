@@ -81,7 +81,8 @@ runs:
           --data-urlencode "comment%5Btext_comment%5D=${{ inputs.comment }}" \
           --data-urlencode "comment%5Battempt%5D=${{ steps.set_attempt.outputs.attempt }}" \
           --fail-with-body \
-          "${grade_arg[@]}"
+          "${grade_arg[@]}" \
+          -d "submission[late_policy_status]=none"
 
     - name: Remove "failing" label. Det gör inget om denna får error, ignorera
       if: success()
