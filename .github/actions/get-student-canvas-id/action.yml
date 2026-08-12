@@ -80,10 +80,6 @@ runs:
           raw=$(curl --silent --fail-with-body -i \
             --header "Authorization: Bearer ${{ inputs.canvas_api_token }}" \
             "$next_url")
-          echo "Raw length: ${#raw}"
-          echo "----- RAW START -----"
-          printf '%s\n' "$raw" | head -100
-          echo "----- RAW END -----"
 
           # Split headers and body on the blank line separating them
           headers=$(echo "$raw" | awk 'BEGIN{RS="\r\n\r\n"; ORS=""} NR==1{print}')
@@ -91,19 +87,6 @@ runs:
 
           # Accumulate users
           all_users=$(echo "$all_users" "$body" | jq -s '[.[0], .[1]] | add')
-          echo "Student email: $STUDENT_EMAIL"
-          body2=$(curl --silent --fail-with-body \
-            --header "Authorization: ***" \
-            "$next_url")
-          echo "$body2" | jq length
-          echo "Body2 length: ${#body2}"
-          all_users2=$(echo "$all_users" "$body2" | jq -s '[.[0], .[1]] | add')
-          echo "Before jq length"
-          echo "$all_users2" | jq length
-          echo "After jq length"
-          echo "$all_users2" | head -c 200
-          echo "Users loaded: $(echo "$all_users" | jq length)"
-          echo "$all_users" | jq -r '.[].login_id' | grep -i "$STUDENT_EMAIL" || true
 
           # Parse Link header for rel="next"
           next_url=$(echo "$headers" \
