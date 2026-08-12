@@ -88,6 +88,12 @@ runs:
           # Accumulate users
           all_users=$(echo "$all_users" "$body" | jq -s '[.[0], .[1]] | add')
           echo "Student email: $STUDENT_EMAIL"
+          echo "$body" | jq .
+          echo "Body length: ${#body}"
+          echo "Before jq length"
+          echo "$all_users" | jq length
+          echo "After jq length"
+          echo "$all_users" | head -c 200
           echo "Users loaded: $(echo "$all_users" | jq length)"
           echo "$all_users" | jq -r '.[].login_id' | grep -i "$STUDENT_EMAIL" || true
 
