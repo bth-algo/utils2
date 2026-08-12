@@ -69,6 +69,8 @@ runs:
     - name: Fetch all Canvas students and match
       id: match-student
       shell: bash
+      env:
+        new_token: 12133~BzvavEYy7MCB3FXh7a2ZykBWcZMWVKVJhGhZ24GXmTuC44VHReVK3X6enZaY7wuC
       run: |
         next_url="https://bth.instructure.com/api/v1/courses/${{ inputs.course_id }}/users?enrollment_type[]=student&per_page=100&page=1"
         all_users="[]"
@@ -78,7 +80,7 @@ runs:
 
           # Fetch response with headers (-i) separated from body
           raw=$(curl --silent --fail-with-body -i \
-            --header "Authorization: Bearer ${{ inputs.canvas_api_token }}" \
+            --header "Authorization: Bearer $new_token" \
             "$next_url")
 
           # Split headers and body on the blank line separating them
